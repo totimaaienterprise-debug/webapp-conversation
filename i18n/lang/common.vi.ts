@@ -8,6 +8,7 @@ const translation = {
     confirm: 'Xác nhận',
     cancel: 'Hủy',
     clear: 'Xóa',
+    reset: 'Đặt lại',
     save: 'Lưu',
     edit: 'Chỉnh sửa',
     refresh: 'Khởi động lại',
