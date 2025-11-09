@@ -24,7 +24,24 @@ export const getLocaleOnServer = async (): Promise<Locale> => {
     languages = new Negotiator({ headers: negotiatorHeaders }).languages()
   }
 
+  const sanitizedLanguages = (languages || [])
+    .map(language => language.trim())
+    .filter(Boolean)
+
+  let canonicalLanguages: string[] = []
+
+  if (sanitizedLanguages.length) {
+    try {
+      canonicalLanguages = Intl.getCanonicalLocales(sanitizedLanguages)
+    }
+    catch (error) {
+      console.warn('[i18n] Failed to canonicalize locales from headers:', sanitizedLanguages, error)
+    }
+  }
+
+  const candidates = canonicalLanguages.length ? canonicalLanguages : [i18n.defaultLocale]
   // match locale
-  const matchedLocale = match(languages, locales, i18n.defaultLocale) as Locale
+  
+  const matchedLocale = match(candidates, locales, i18n.defaultLocale) as Locale
   return matchedLocale
 }
