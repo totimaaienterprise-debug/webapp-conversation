@@ -8,6 +8,7 @@ const translation = {
     confirm: 'Confirmar',
     cancel: 'Cancelar',
     clear: 'Limpiar',
+    reset: 'Restablecer',
     save: 'Guardar',
     edit: 'Editar',
     refresh: 'Reiniciar',
