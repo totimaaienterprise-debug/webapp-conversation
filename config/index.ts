@@ -5,11 +5,16 @@ export const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`
 const disableSessionSameSiteEnv = process.env.NEXT_PUBLIC_DISABLE_SESSION_SAME_SITE
 
 export const APP_INFO: AppInfo = {
-  title: 'Chat APP',
+  title: '〇〇クリニックAI',
   description: '',
   copyright: '',
   privacy_policy: '',
   default_language: 'en',
+  avatar_url: '',
+  show_welcome_page: false,
+  show_conversation_history: false,
+  // iframe など別オリジンからアクセスする場合は SameSite=None; Secure を付けたクッキーが必要
+  // NEXT_PUBLIC_DISABLE_SESSION_SAME_SITE=true を指定すると自動で切り替わります（デフォルトは true）
   disable_session_same_site: disableSessionSameSiteEnv
     ? disableSessionSameSiteEnv.toLowerCase() === 'true'
     : true,
