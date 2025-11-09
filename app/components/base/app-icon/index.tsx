@@ -19,7 +19,7 @@ const AppIcon: FC<AppIconProps> = ({
 }) => {
   const content = icon
     ? <img src={icon} alt="" className={style.appIconImage} />
-    : '🤖'
+    : '🤒'
 
   return (
     <span
