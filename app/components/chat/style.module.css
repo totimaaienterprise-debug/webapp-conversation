@@ -1,6 +1,11 @@
 .answerIcon {
   position: relative;
   background: url(./icons/robot.svg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #e2e8f0;  
 }
 
 .typeingIcon {
