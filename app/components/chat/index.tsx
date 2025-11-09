@@ -37,6 +37,7 @@ export interface IChatProps {
   controlClearQuery?: number
   visionConfig?: VisionSettings
   fileConfig?: FileUpload
+  assistantAvatarUrl?: string
 }
 
 const Chat: FC<IChatProps> = ({
@@ -51,6 +52,7 @@ const Chat: FC<IChatProps> = ({
   controlClearQuery,
   visionConfig,
   fileConfig,
+  assistantAvatarUrl,  
 }) => {
   const { t } = useTranslation()
   const { notify } = Toast
@@ -155,6 +157,7 @@ const Chat: FC<IChatProps> = ({
               onFeedback={onFeedback}
               isResponding={isResponding && isLast}
               suggestionClick={suggestionClick}
+              assistantAvatarUrl={assistantAvatarUrl}
             />
           }
           return (
