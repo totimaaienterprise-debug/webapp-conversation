@@ -8,7 +8,9 @@ export const APP_INFO: AppInfo = {
   copyright: '',
   privacy_policy: '',
   default_language: 'en',
-  disable_session_same_site: false, // set it to true if you want to embed the chatbot in an iframe
+  disable_session_same_site: disableSessionSameSiteEnv
+    ? disableSessionSameSiteEnv.toLowerCase() === 'true'
+    : true,
 }
 
 export const isShowPrompt = false
