@@ -15,7 +15,12 @@ const AppIcon: FC<AppIconProps> = ({
   rounded = false,
   background,
   className,
+  icon,  
 }) => {
+  const content = icon
+    ? <img src={icon} alt="" className={style.appIconImage} />
+    : '🤖'
+
   return (
     <span
       className={classNames(
@@ -28,7 +33,7 @@ const AppIcon: FC<AppIconProps> = ({
         background,
       }}
     >
-      🤖
+      {content}
     </span>
   )
 }
