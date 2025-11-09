@@ -113,6 +113,9 @@ export interface AppInfo {
   copyright?: string
   privacy_policy?: string
   disable_session_same_site?: boolean
+  avatar_url?: string
+  show_welcome_page?: boolean
+  show_conversation_history?: boolean  
 }
 
 export enum Resolution {
