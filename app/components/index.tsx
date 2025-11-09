@@ -32,7 +32,10 @@ const Main: FC<IMainProps> = () => {
   const media = useBreakpoints()
   const isMobile = media === MediaType.mobile
   const hasSetAppConfig = APP_ID && API_KEY
-
+  const showWelcome = APP_INFO.show_welcome_page === true
+  const allowConversationHistory = APP_INFO.show_conversation_history === true
+  const assistantAvatarUrl = APP_INFO.avatar_url
+  
   /*
   * app info
   */
@@ -83,7 +86,7 @@ const Main: FC<IMainProps> = () => {
   } = useConversation()
 
   const [conversationIdChangeBecauseOfNew, setConversationIdChangeBecauseOfNew, getConversationIdChangeBecauseOfNew] = useGetState(false)
-  const [isChatStarted, { setTrue: setChatStarted, setFalse: setChatNotStarted }] = useBoolean(false)
+  const [isChatStarted, { setTrue: setChatStarted, setFalse: setChatNotStarted }] = useBoolean(!showWelcome)
   const handleStartChat = (inputs: Record<string, any>) => {
     createNewChat()
     setConversationIdChangeBecauseOfNew(true)
@@ -93,6 +96,7 @@ const Main: FC<IMainProps> = () => {
     setChatList(generateNewChatListWithOpenStatement('', inputs))
   }
   const hasSetInputs = (() => {
+    if (!showWelcome) { return true }
     if (!isNewConversation) { return true }
 
     return isChatStarted
@@ -151,12 +155,13 @@ const Main: FC<IMainProps> = () => {
       })
     }
 
-    if (isNewConversation && isChatStarted) { setChatList(generateNewChatListWithOpenStatement()) }
+    const shouldShowOpeningStatement = showWelcome ? isChatStarted : true
+    if (isNewConversation && shouldShowOpeningStatement) { setChatList(generateNewChatListWithOpenStatement()) }
   }
   useEffect(handleConversationSwitch, [currConversationId, inited])
 
   const handleConversationIdChange = (id: string) => {
-    if (id === '-1') {
+    if (id === '-1' && allowConversationHistory) {
       createNewChat()
       setConversationIdChangeBecauseOfNew(true)
     }
@@ -470,7 +475,7 @@ const Main: FC<IMainProps> = () => {
         }
         setConversationIdChangeBecauseOfNew(false)
         resetNewConversationInputs()
-        setChatNotStarted()
+        if (showWelcome) { setChatNotStarted() }
         setCurrConversationId(tempNewConversationId, APP_ID, true)
         setRespondingFalse()
       },
@@ -635,6 +640,7 @@ const Main: FC<IMainProps> = () => {
   }
 
   const renderSidebar = () => {
+    if (!allowConversationHistory) { return null }
     if (!APP_ID || !APP_INFO || !promptConfig) { return null }
     return (
       <Sidebar
@@ -655,8 +661,9 @@ const Main: FC<IMainProps> = () => {
       <Header
         title={APP_INFO.title}
         isMobile={isMobile}
-        onShowSideBar={showSidebar}
-        onCreateNewChat={() => handleConversationIdChange('-1')}
+        onShowSideBar={allowConversationHistory ? showSidebar : undefined}
+        onCreateNewChat={allowConversationHistory ? () => handleConversationIdChange('-1') : undefined}
+        iconUrl={assistantAvatarUrl}
       />
       <div className="flex rounded-t-2xl bg-white overflow-hidden">
         {/* sidebar */}
@@ -670,17 +677,19 @@ const Main: FC<IMainProps> = () => {
         )}
         {/* main */}
         <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
-          <ConfigSence
-            conversationName={conversationName}
-            hasSetInputs={hasSetInputs}
-            isPublicVersion={isShowPrompt}
-            siteInfo={APP_INFO}
-            promptConfig={promptConfig}
-            onStartChat={handleStartChat}
-            canEditInputs={canEditInputs}
-            savedInputs={currInputs as Record<string, any>}
-            onInputsChange={setCurrInputs}
-          ></ConfigSence>
+          {showWelcome && (
+            <ConfigSence
+              conversationName={conversationName}
+              hasSetInputs={hasSetInputs}
+              isPublicVersion={isShowPrompt}
+              siteInfo={APP_INFO}
+              promptConfig={promptConfig}
+              onStartChat={handleStartChat}
+              canEditInputs={canEditInputs}
+              savedInputs={currInputs as Record<string, any>}
+              onInputsChange={setCurrInputs}
+            ></ConfigSence>
+          )}
 
           {
             hasSetInputs && (
@@ -693,6 +702,7 @@ const Main: FC<IMainProps> = () => {
                   checkCanSend={checkCanSend}
                   visionConfig={visionConfig}
                   fileConfig={fileConfig}
+                  assistantAvatarUrl={assistantAvatarUrl}
                 />
               </div>)
           }
