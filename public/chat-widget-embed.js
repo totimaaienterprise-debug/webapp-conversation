@@ -7,8 +7,8 @@
     launcherText: 'チャットで相談',
     closeText: 'チャットを閉じる',
     title: 'チャットボット',
-    width: 420,
-    height: 640,
+    width: 520,
+    height: 720,
     allow: 'clipboard-write; microphone; camera',
   }
 
