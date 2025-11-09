@@ -323,16 +323,31 @@ const Main: FC<IMainProps> = () => {
   const checkCanSend = () => {
     if (currConversationId !== '-1') { return true }
 
-    if (!currInputs || !promptConfig?.prompt_variables) { return true }
+    if (!promptConfig?.prompt_variables?.length) { return true }
 
-    const inputLens = Object.values(currInputs).length
-    const promptVariablesLens = promptConfig.prompt_variables.length
+    if (!showWelcome) { return true }
 
-    const emptyInput = inputLens < promptVariablesLens || Object.values(currInputs).find(v => !v)
-    if (emptyInput) {
+    const requiredVariables = promptConfig.prompt_variables.filter(variable => variable.required !== false)
+
+    if (!requiredVariables.length) { return true }
+
+    if (!currInputs) {
       logError(t('app.errorMessage.valueOfVarRequired'))
       return false
     }
+
+    const hasEmptyRequiredValue = requiredVariables.some(({ key }) => {
+      const value = currInputs[key]
+      if (Array.isArray(value)) { return value.length === 0 }
+      if (typeof value === 'string') { return value.trim().length === 0 }
+      return value === undefined || value === null || value === ''
+    })
+
+    if (hasEmptyRequiredValue) {
+      logError(t('app.errorMessage.valueOfVarRequired'))
+      return false
+    }
+    
     return true
   }
 
