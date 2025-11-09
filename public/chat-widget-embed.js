@@ -1,3 +1,6 @@
+// このファイルは Next.js アプリの `public/` フォルダに配置してください。
+// ビルド後は `https://<デプロイ先ドメイン>/chat-widget-embed.js` という URL で自動配信されます。
+// 埋め込み先サイトでは、この URL を <script src="..."> として読み込むだけで動作します。
 (() => {
   const defaultConfig = {
     url: '',
