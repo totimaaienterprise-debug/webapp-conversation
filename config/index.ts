@@ -10,7 +10,7 @@ export const APP_INFO: AppInfo = {
   copyright: '',
   privacy_policy: '',
   default_language: 'en',
-  avatar_url: '',
+  avatar_url: 'https://mute-yellow-nqneatrsk1.edgeone.app/ChatGPT%20Image%202025年11月3日%2014_37_19.png',
   show_welcome_page: false,
   show_conversation_history: false,
   // iframe など別オリジンからアクセスする場合は SameSite=None; Secure を付けたクッキーが必要
