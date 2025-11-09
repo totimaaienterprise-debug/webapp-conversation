@@ -40,6 +40,7 @@ export const getLocaleOnServer = async (): Promise<Locale> => {
   }
 
   const candidates = canonicalLanguages.length ? canonicalLanguages : [i18n.defaultLocale]
+
   // match locale
   
   const matchedLocale = match(candidates, locales, i18n.defaultLocale) as Locale
