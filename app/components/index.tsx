@@ -173,6 +173,22 @@ const Main: FC<IMainProps> = () => {
     hideSidebar()
   }
 
+  const handleResetConversation = () => {
+    if (isResponding) {
+      abortController?.abort()
+      setRespondingFalse()
+      setAbortController(null)
+    }
+    setConversationIdChangeBecauseOfNew(true)
+    createNewChat()
+    resetNewConversationInputs()
+    setChatList(generateNewChatListWithOpenStatement())
+    setOpeningSuggestedQuestions([])
+    setUserQuery('')
+    if (showWelcome) { setChatNotStarted() }
+    setCurrConversationId('-1', APP_ID)
+  }
+  
   /*
   * chat info. chat is under conversation.
   */
@@ -664,6 +680,8 @@ const Main: FC<IMainProps> = () => {
         onShowSideBar={allowConversationHistory ? showSidebar : undefined}
         onCreateNewChat={allowConversationHistory ? () => handleConversationIdChange('-1') : undefined}
         iconUrl={assistantAvatarUrl}
+        onResetConversation={handleResetConversation}
+        resetText={t('common.operation.reset')}
       />
       <div className="flex rounded-t-2xl bg-white overflow-hidden">
         {/* sidebar */}
