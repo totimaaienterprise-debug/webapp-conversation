@@ -8,6 +8,7 @@ const translation = {
     confirm: '確認',
     cancel: 'キャンセル',
     clear: 'クリア',
+    reset: 'リセット',
     save: '保存',
     edit: '編集',
     refresh: '再起動',
