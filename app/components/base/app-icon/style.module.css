@@ -21,3 +21,10 @@
 .appIcon.rounded {
   @apply rounded-full;
 }
+
+.appIconImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;  
+}
