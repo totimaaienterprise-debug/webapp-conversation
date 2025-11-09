@@ -6,9 +6,9 @@
     url: '',
     launcherText: 'チャットで相談',
     closeText: 'チャットを閉じる',
-    title: 'チャットボット',
-    width: 520,
-    height: 720,
+    title: '〇〇クリニックAI',
+    width: 600,
+    height: 750,
     allow: 'clipboard-write; microphone; camera',
   }
 
