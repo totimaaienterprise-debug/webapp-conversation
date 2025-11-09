@@ -52,7 +52,7 @@ const Chat: FC<IChatProps> = ({
   controlClearQuery,
   visionConfig,
   fileConfig,
-  assistantAvatarUrl,  
+  assistantAvatarUrl,
 }) => {
   const { t } = useTranslation()
   const { notify } = Toast
@@ -60,7 +60,8 @@ const Chat: FC<IChatProps> = ({
 
   const [query, setQuery] = React.useState('')
   const queryRef = useRef('')
-
+  const scrollAnchorRef = useRef<HTMLDivElement | null>(null)
+  
   const handleContentChange = (e: any) => {
     const value = e.target.value
     setQuery(value)
@@ -86,6 +87,10 @@ const Chat: FC<IChatProps> = ({
       queryRef.current = ''
     }
   }, [controlClearQuery])
+  
+  useEffect(() => {
+    scrollAnchorRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
+  }, [chatList])  
   const {
     files,
     onUpload,
@@ -144,9 +149,9 @@ const Chat: FC<IChatProps> = ({
   }
 
   return (
-    <div className={cn(!feedbackDisabled && 'px-3.5', 'h-full')}>
+    <div className={cn(!feedbackDisabled && 'px-3.5', 'h-full flex flex-col')}>
       {/* Chat List */}
-      <div className="h-full space-y-[30px]">
+      <div className="flex-1 space-y-[30px] overflow-y-auto pr-1">
         {chatList.map((item) => {
           if (item.isAnswer) {
             const isLast = item.id === chatList[chatList.length - 1].id
@@ -170,11 +175,12 @@ const Chat: FC<IChatProps> = ({
             />
           )
         })}
+        <div ref={scrollAnchorRef} />
       </div>
       {
         !isHideSendInput && (
-          <div className='fixed z-10 bottom-0 left-1/2 transform -translate-x-1/2 pc:ml-[122px] tablet:ml-[96px] mobile:ml-0 pc:w-[794px] tablet:w-[794px] max-w-full mobile:w-full px-3.5'>
-            <div className='p-[5.5px] max-h-[150px] bg-white border-[1.5px] border-gray-200 rounded-xl overflow-y-auto'>
+          <div className='pt-3.5'>
+            <div className='relative p-[5.5px] max-h-[150px] bg-white border-[1.5px] border-gray-200 rounded-xl overflow-y-auto'>
               {
                 visionConfig?.enabled && (
                   <>
