@@ -8,7 +8,7 @@
     closeText: 'チャットを閉じる',
     title: '〇〇クリニックAI',
     width: 600,
-    height: 750,
+    height: 800,
     allow: 'clipboard-write; microphone; camera',
   }
 
