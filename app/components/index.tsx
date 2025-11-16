@@ -688,57 +688,59 @@ const Main: FC<IMainProps> = () => {
   if (!APP_ID || !APP_INFO || !promptConfig) { return <Loading type='app' /> }
 
   return (
-    <div className='bg-gray-100'>
-      <Header
-        title={APP_INFO.title}
-        isMobile={isMobile}
-        onShowSideBar={allowConversationHistory ? showSidebar : undefined}
-        onCreateNewChat={allowConversationHistory ? () => handleConversationIdChange('-1') : undefined}
-        iconUrl={assistantAvatarUrl}
-        onResetConversation={handleResetConversation}
-        resetText={t('common.operation.reset')}
-      />
-      <div className="flex rounded-t-2xl bg-white overflow-hidden">
-        {/* sidebar */}
-        {!isMobile && renderSidebar()}
-        {isMobile && isShowSidebar && (
-          <div className='fixed inset-0 z-50' style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }} onClick={hideSidebar} >
-            <div className='inline-block' onClick={e => e.stopPropagation()}>
-              {renderSidebar()}
+    <div className='min-h-screen bg-gradient-to-br from-[#d7e7ff] via-white to-[#b7d8ff] px-3 py-6 md:px-6'>
+      <div className='mx-auto flex max-w-6xl flex-col overflow-hidden rounded-[32px] bg-white/80 shadow-[0_25px_80px_rgba(15,23,42,0.25)] ring-1 ring-white/60 backdrop-blur'>
+        <Header
+          title={APP_INFO.title}
+          isMobile={isMobile}
+          onShowSideBar={allowConversationHistory ? showSidebar : undefined}
+          onCreateNewChat={allowConversationHistory ? () => handleConversationIdChange('-1') : undefined}
+          iconUrl={assistantAvatarUrl}
+          onResetConversation={handleResetConversation}
+          resetText={t('common.operation.reset')}
+        />
+        <div className="flex flex-col lg:flex-row rounded-t-[32px] bg-gradient-to-br from-white/85 via-white/70 to-[#e0f0ff]/80 overflow-hidden">
+          {/* sidebar */}
+          {!isMobile && renderSidebar()}
+          {isMobile && isShowSidebar && (
+            <div className='fixed inset-0 z-50' style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }} onClick={hideSidebar} >
+              <div className='inline-block' onClick={e => e.stopPropagation()}>
+                {renderSidebar()}
+              </div>
             </div>
-          </div>
-        )}
-        {/* main */}
-        <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
-          {showWelcome && (
-            <ConfigSence
-              conversationName={conversationName}
-              hasSetInputs={hasSetInputs}
-              isPublicVersion={isShowPrompt}
-              siteInfo={APP_INFO}
-              promptConfig={promptConfig}
-              onStartChat={handleStartChat}
-              canEditInputs={canEditInputs}
-              savedInputs={currInputs as Record<string, any>}
-              onInputsChange={setCurrInputs}
-            ></ConfigSence>
           )}
+{/* main */}
+          <div className='flex-grow flex flex-col h-[calc(100vh_-_4rem)] overflow-y-auto px-4 pb-8 lg:px-8'>
+            {showWelcome && (
+              <ConfigSence
+                conversationName={conversationName}
+                hasSetInputs={hasSetInputs}
+                isPublicVersion={isShowPrompt}
+                siteInfo={APP_INFO}
+                promptConfig={promptConfig}
+                onStartChat={handleStartChat}
+                canEditInputs={canEditInputs}
+                savedInputs={currInputs as Record<string, any>}
+                onInputsChange={setCurrInputs}
+              ></ConfigSence>
+            )}
 
-          {
-            hasSetInputs && (
-              <div className='relative grow pc:w-[794px] max-w-full mobile:w-full pb-10 mx-auto mb-3.5' ref={chatListDomRef}>
-                <Chat
-                  chatList={chatList}
-                  onSend={handleSend}
-                  onFeedback={handleFeedback}
-                  isResponding={isResponding}
-                  checkCanSend={checkCanSend}
-                  visionConfig={visionConfig}
-                  fileConfig={fileConfig}
-                  assistantAvatarUrl={assistantAvatarUrl}
-                />
-              </div>)
-          }
+            {
+              hasSetInputs && (
+                <div className='relative grow pc:w-[794px] max-w-full mobile:w-full pb-10 mx-auto mb-3.5' ref={chatListDomRef}>
+                  <Chat
+                    chatList={chatList}
+                    onSend={handleSend}
+                    onFeedback={handleFeedback}
+                    isResponding={isResponding}
+                    checkCanSend={checkCanSend}
+                    visionConfig={visionConfig}
+                    fileConfig={fileConfig}
+                    assistantAvatarUrl={assistantAvatarUrl}
+                  />
+                </div>)
+            }
+          </div>
         </div>
       </div>
     </div>
