@@ -196,7 +196,7 @@ const Answer: FC<IAnswerProps> = ({
         </div>
         <div className={`${s.answerWrap} max-w-[calc(100%-3rem)]`}>
           <div className={`${s.answer} relative text-sm text-gray-900`}>
-            <div className='ml-2 py-3 px-4 bg-gray-100 rounded-tr-2xl rounded-b-2xl'>
+            <div className='ml-2 py-4 px-5 bg-white/90 text-slate-800 rounded-tr-2xl rounded-b-2xl shadow-[0_10px_30px_rgba(15,23,42,0.08)] backdrop-blur'>
               {answerBody}
               {suggestedQuestions.length > 0 && (
                 <div className="mt-3">
