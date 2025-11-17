@@ -688,8 +688,8 @@ const Main: FC<IMainProps> = () => {
   if (!APP_ID || !APP_INFO || !promptConfig) { return <Loading type='app' /> }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-[#d7e7ff] via-white to-[#b7d8ff] px-3 py-6 md:px-6'>
-      <div className='mx-auto flex max-w-6xl flex-col overflow-hidden rounded-[32px] bg-white/80 shadow-[0_25px_80px_rgba(15,23,42,0.25)] ring-1 ring-white/60 backdrop-blur'>
+    <div className='min-h-screen bg-gradient-to-br from-[#d7e7ff] via-white to-[#b7d8ff]'>
+      <div className='flex min-h-screen flex-col overflow-hidden bg-white/80 shadow-[0_25px_80px_rgba(15,23,42,0.25)] ring-1 ring-white/60 backdrop-blur'>
         <Header
           title={APP_INFO.title}
           isMobile={isMobile}
@@ -699,7 +699,7 @@ const Main: FC<IMainProps> = () => {
           onResetConversation={handleResetConversation}
           resetText={t('common.operation.reset')}
         />
-        <div className="flex flex-col lg:flex-row rounded-t-[32px] bg-gradient-to-br from-white/85 via-white/70 to-[#e0f0ff]/80 overflow-hidden">
+        <div className="flex flex-col lg:flex-row bg-gradient-to-br from-white/85 via-white/70 to-[#e0f0ff]/80 overflow-hidden">
           {/* sidebar */}
           {!isMobile && renderSidebar()}
           {isMobile && isShowSidebar && (
@@ -709,7 +709,7 @@ const Main: FC<IMainProps> = () => {
               </div>
             </div>
           )}
-{/* main */}
+          {/* main */}
           <div className='flex-grow flex flex-col h-[calc(100vh_-_4rem)] overflow-y-auto px-4 pb-8 lg:px-8'>
             {showWelcome && (
               <ConfigSence
@@ -727,7 +727,7 @@ const Main: FC<IMainProps> = () => {
 
             {
               hasSetInputs && (
-                <div className='relative grow pc:w-[794px] max-w-full mobile:w-full pb-10 mx-auto mb-3.5' ref={chatListDomRef}>
+                <div className='relative grow w-full pb-10 mb-3.5' ref={chatListDomRef}>
                   <Chat
                     chatList={chatList}
                     onSend={handleSend}
