@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import React from 'react'
+import Link from 'next/link'
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -39,6 +40,12 @@ const Header: FC<IHeaderProps> = ({
         </div>
       )}
       <div className='flex items-center space-x-3'>
+        <Link
+          href='/policy'
+          className='px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded-full border border-white/40 bg-white/10 text-white/90 hover:bg-white/20 transition'
+        >
+          policy
+        </Link>
         <AppIcon size="small" rounded icon={iconUrl} />
         <div className=" text-base font-semibold tracking-wide">{title}</div>
       </div>
