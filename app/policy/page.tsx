@@ -21,9 +21,17 @@ const PolicyPage: FC = () => {
           </p>
           <p className='text-base leading-relaxed text-slate-700'>
             (1) 当社が提供する本サービスおよび当社が運営するウェブサイトに基づく各種情報をご提供するため
+          </p>
+          <p className='text-base leading-relaxed text-slate-700'>          
             (2) 当社が提供する仮予約サービスを運営するため（ただし、本サービス上に仮予約機能が実装されている場合に限ります）
+          </p>
+          <p className='text-base leading-relaxed text-slate-700'>          
             (3) 当社サービスに関するご案内や、各種お問い合わせへの回答・対応を行うため
+          </p>
+          <p className='text-base leading-relaxed text-slate-700'>          
             (4) ユーザーの皆さまによる本サービスの利用状況等を分析し、本サービスの改善および新たなサービスの企画・開発等を行うため
+          </p>
+          <p className='text-base leading-relaxed text-slate-700'>        
             (5) 上記各利用目的に付随し、これらと合理的な関連性を有する目的を達成するため
           </p>
           <p className='text-base leading-relaxed text-slate-700'>
