@@ -213,7 +213,7 @@ const Chat: FC<IChatProps> = ({
                 }
                 <Textarea
                   className={`
-                    block w-full rounded-2xl border border-transparent bg-transparent px-4 pr-[140px] py-3 text-base leading-6 text-slate-700 outline-none transition focus:border-blue-200 focus:ring-0 appearance-none resize-none
+                    block w-full rounded-2xl border border-transparent bg-transparent px-4 pr-[96px] py-3 text-base leading-6 text-slate-700 outline-none transition focus:border-blue-200 focus:ring-0 appearance-none resize-none
                     ${visionConfig?.enabled && 'pl-12'}
                   `}
                   value={query}
@@ -222,8 +222,7 @@ const Chat: FC<IChatProps> = ({
                   onKeyDown={handleKeyDown}
                   autoSize
                 />
-                <div className="absolute bottom-3 right-4 flex items-center h-12 gap-3">
-                  <div className={`${s.count} h-8 min-w-[48px] rounded-full bg-blue-50/80 px-3 text-center text-sm font-medium leading-8 text-blue-700 shadow-inner`}>{query.trim().length}</div>
+                <div className="absolute bottom-3 right-4 flex items-center h-12">
                   <Tooltip
                     selector='send-tip'
                     htmlContent={
